@@ -56,7 +56,7 @@ class ProductController extends AbstractController
         $entityManager->persist($product);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Product created successfully.'], Response::HTTP_CREATED);
+        return $this->json(['message' => 'Product created'], Response::HTTP_CREATED);
     }
 
     #[Route('/api/products/{id}', name: 'api_products_update', methods: ['PUT'])]
@@ -70,7 +70,7 @@ class ProductController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json(['message' => 'Product updated successfully.'], Response::HTTP_OK);
+        return $this->json(['message' => 'Product updated'], Response::HTTP_OK);
     }
 
     #[Route('/api/products/{id}', name: 'api_products_delete', methods: ['DELETE'])]
@@ -79,6 +79,6 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Product deleted successfully.'], Response::HTTP_OK);
+        return $this->json(['message' => 'Product deleted '], Response::HTTP_OK);
     }
 }

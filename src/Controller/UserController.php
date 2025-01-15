@@ -51,10 +51,10 @@ class UserController extends AbstractController
         $data = json_decode($request->getContent(), true);
     
         // Attente auth donc associe company par défaut
-        $company = $entityManager->getRepository(Company::class)->find(6);
+        $company = $entityManager->getRepository(Company::class)->find(1);
     
         if (!$company) {
-            return $this->json(['message' => 'Default company not found'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['message' => 'Company not found'], Response::HTTP_BAD_REQUEST);
         }
     
         $newUser = new User();
@@ -65,7 +65,7 @@ class UserController extends AbstractController
         $entityManager->persist($newUser);
         $entityManager->flush();
     
-        return $this->json(['message' => 'User created successfully.'], Response::HTTP_CREATED);
+        return $this->json(['message' => 'User created'], Response::HTTP_CREATED);
     }
     
     
@@ -76,6 +76,6 @@ class UserController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return $this->json(['message' => 'User deleted successfully.'], Response::HTTP_NO_CONTENT);
+        return $this->json(['message' => 'User deleted'], Response::HTTP_OK);
     }
 }

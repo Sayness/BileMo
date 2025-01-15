@@ -54,7 +54,7 @@ class CompanyController extends AbstractController
         $entityManager->persist($company);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Company created successfully.'], Response::HTTP_CREATED);
+        return $this->json(['message' => 'Company created'], Response::HTTP_CREATED);
     }
 
     #[Route('/api/companies/{id}', name: 'api_companies_update', methods: ['PUT'])]
@@ -70,7 +70,7 @@ class CompanyController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->json(['message' => 'Company updated successfully.'], Response::HTTP_OK);
+        return $this->json(['message' => 'Company updated'], Response::HTTP_OK);
     }
 
     #[Route('/api/companies/{id}', name: 'api_companies_delete', methods: ['DELETE'])]
@@ -89,7 +89,7 @@ class CompanyController extends AbstractController
         $entityManager->remove($company);
         $entityManager->flush();
     
-        return $this->json(['message' => 'Company deleted successfully.'], Response::HTTP_NO_CONTENT);
+        return $this->json(['message' => 'Company deleted'], Response::HTTP_NO_CONTENT);
     }
     
     
