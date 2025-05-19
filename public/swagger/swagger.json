@@ -1,0 +1,408 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/customer/{id}": {
+            "get": {
+                "summary": "Recuperer un client par ID",
+                "operationId": "e693b232c868a9d13f92ce2d5000d83e",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "name": "id",
+                        "description": "l'id du client que vous voulez recuperer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details for one user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Erreur du token JWT"
+                    },
+                    "403": {
+                        "description": "Vous n'êtes pas autorisé à accèder à cette ressource."
+                    },
+                    "404": {
+                        "description": "Aucun client trouvé avec cet ID"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/api/customers": {
+            "get": {
+                "summary": "Liste des clients",
+                "operationId": "a1b670eddcc7dd1b403f23bb9f45aceb",
+                "responses": {
+                    "200": {
+                        "description": "tous les clients"
+                    },
+                    "401": {
+                        "description": "Erreur du token jwt"
+                    },
+                    "404": {
+                        "description": "Aucun client trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/customers": {
+            "post": {
+                "summary": "Créer un nouveau client",
+                "operationId": "6ca7d79be1dd9c4dede4048189f07c79",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstname": {
+                                        "description": "Prénom du client",
+                                        "type": "string",
+                                        "default": "John"
+                                    },
+                                    "lastname": {
+                                        "description": "Nom du client",
+                                        "type": "string",
+                                        "default": "Doe"
+                                    },
+                                    "email": {
+                                        "description": "e-mail de l'utilisateur",
+                                        "type": "string",
+                                        "default": "john.doe@email.com"
+                                    },
+                                    "password": {
+                                        "description": "Mot de passe de l'utilisateur",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de syntaxe"
+                    },
+                    "401": {
+                        "description": "JWT erreur de token"
+                    },
+                    "403": {
+                        "description": "Accès interdit"
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "summary": "Liste des produit",
+                "operationId": "7772d24adc6e3d5072094809e6d5c8ea",
+                "responses": {
+                    "200": {
+                        "description": "tous les produits"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "summary": "Recuperer un produit par ID",
+                "operationId": "7d684932b519642591e0ba30ebf3f780",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "name": "id",
+                        "description": "l'id du produit que vous voulez recuperer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Detail du produit"
+                    },
+                    "404": {
+                        "description": "Aucun produit trouvé"
+                    }
+                }
+            }
+        },
+        "/api/user": {
+            "post": {
+                "summary": "Créer un nouvel utilisateur",
+                "operationId": "2a44cde1b8a9d083e0f4e5c08eb9b346",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstname": {
+                                        "description": "Prénom de l'utilisateur",
+                                        "type": "string",
+                                        "default": "Saul"
+                                    },
+                                    "lastname": {
+                                        "description": "Nom de l'utilisateur",
+                                        "type": "string",
+                                        "default": "Goodman"
+                                    },
+                                    "email": {
+                                        "description": "e-mail de l'utilisateur",
+                                        "type": "string",
+                                        "default": "saul.goodman@email.com"
+                                    },
+                                    "password": {
+                                        "description": "Mot de passe de l'utilisateur",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de syntaxe"
+                    },
+                    "401": {
+                        "description": "JWT erreur de token"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}/delete": {
+            "delete": {
+                "summary": "Supprimer un utilisateur par ID",
+                "operationId": "e86371d66afcfae63216ddc1ec7eaab5",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "name": "id",
+                        "description": "ID de l'utilisateur qui va être supprimé"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "utilisateur supprimé"
+                    },
+                    "401": {
+                        "description": "Erreur du token jwt"
+                    },
+                    "403": {
+                        "description": "Vous n'êtes pas autorisé à accèder à cette ressource."
+                    },
+                    "404": {
+                        "description": "Cet utilisateur n'existe pas"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "summary": "Liste des utilisateurs",
+                "operationId": "3b6e6e651728114a54281f3f5241c939",
+                "responses": {
+                    "200": {
+                        "description": "tous les utilisateurs"
+                    },
+                    "401": {
+                        "description": "Erreur du token jwt"
+                    },
+                    "404": {
+                        "description": "Aucun utilisateur trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        },
+        "/api/user/{id}": {
+            "get": {
+                "summary": "Recuperer un utilisateur par ID",
+                "operationId": "a3fcc7079215af07b39db8f92b5e698d",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "required": true,
+                        "name": "id",
+                        "description": "l'id de l'utilisateur que vous voulez recuperer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détail de l'utilisateur"
+                    },
+                    "403": {
+                        "description": "Vous n'êtes pas autorisé à accèder à cette ressource."
+                    },
+                    "401": {
+                        "description": "Erreur du token JWT"
+                    },
+                    "404": {
+                        "description": "Cet utilisateur n'existe pas"
+                    }
+                },
+                "security": [
+                    {
+                        "scalar": "bearer"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "firstname": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastname": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "roles": {
+                        "type": "json",
+                        "nullable": true
+                    },
+                    "password": {
+                        "description": "The hashed password",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "Company": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "roles": {
+                        "type": "json",
+                        "nullable": true
+                    },
+                    "password": {
+                        "description": "The hashed password",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstname": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastname": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
