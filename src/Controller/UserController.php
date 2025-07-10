@@ -27,7 +27,7 @@ class UserController extends AbstractController
 {
     /**
      * @OA\Post(
-     *     path="/api/users",
+     *     path="/api/user",
      *    security={"bearer"},
      *   summary="Créer un nouvel utilisateur",
      *   @OA\RequestBody(
@@ -64,11 +64,8 @@ class UserController extends AbstractController
      *   ),
      *   @OA\Response(
      *     response=201,
-     *     description="Utilisateur créer",
-     *     @OA\JsonContent(
-     *       type="array",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/User"))
-     *     )
+     *     description="Utilisateur créé",
+     *     @OA\JsonContent(ref="#/components/schemas/User")
      *   ),
      *   @OA\Response(response=400, description="Erreur de syntaxe"),
      *   @OA\Response(
@@ -77,7 +74,7 @@ class UserController extends AbstractController
      *   ),
      *  
      * )
-     * @Route("/api/users", name="store_user",methods={"POST"})
+     * @Route("/api/user", name="api_user_create", methods={"POST"})
      */
     public function storeUser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordEncoder, ValidatorInterface $validator):Response
     {
@@ -115,26 +112,22 @@ class UserController extends AbstractController
        
     }
 
-     /**
-      * @OA\Delete(
-     *     path="/api/user/{id}/delete",
+    /**
+     * @OA\Delete(
+     *     path="/api/user/{id}",
      *    security={"bearer"},
      *   summary="Supprimer un utilisateur par ID",
-     *   @OA\Response(response=204, description="utilisateur supprimé"),
-     *   @OA\Response(response=401, description="Erreur du token jwt"),
-     *   @OA\Response(response=403, description="Vous n'êtes pas autorisé à accèder à cette ressource."),
-     *   @OA\Response(response=404, description="Cet utilisateur n'existe pas"),
-     *  @OA\Response(
-     *     response=403,
-     *     description="Accès interdit"
-     *   ),
      *   @OA\PathParameter(
      *     name="id",
      *     description="ID de l'utilisateur qui va être supprimé"
-     *   )
+     *   ),
+     *   @OA\Response(response=204, description="utilisateur supprimé"),
+     *   @OA\Response(response=401, description="Erreur du token jwt"),
+     *   @OA\Response(response=403, description="Vous n'êtes pas autorisé à accèder à cette ressource."),
+     *   @OA\Response(response=404, description="Cet utilisateur n'existe pas")
      * )
      * 
-     * @Route("/api/user/{id}/delete", name="delete_user",methods={"DELETE"})
+     * @Route("/api/user/{id}", name="api_user_delete", methods={"DELETE"})
      * 
      */
     public function DeleteUser(int $id, CustomerRepository $customerRepository, UserRepository $userRepository, EntityManagerInterface $entityManager): JsonResponse
@@ -174,7 +167,7 @@ class UserController extends AbstractController
 
     /**
      * @OA\Get(
-     *     path="/api/users",
+     *     path="/api/user",
      *     security={"bearer"},
      *   summary="Liste des utilisateurs",
      *   @OA\Response(response=200, description="tous les utilisateurs"),
@@ -182,7 +175,7 @@ class UserController extends AbstractController
      *   @OA\Response(response=404, description="Aucun utilisateur trouvé")
      * )
      * 
-     * @Route("/api/users", name="Users",methods={"GET"} )
+     * @Route("/api/user", name="api_user_index", methods={"GET"})
      * 
      */
     public function listUser(UserRepository $userRepository): Response
@@ -204,13 +197,17 @@ class UserController extends AbstractController
      *     name="id",
      *     description="l'id de l'utilisateur que vous voulez recuperer"
      *   ),
-     *   @OA\Response(response=200, description="Détail de l'utilisateur"),
+     *   @OA\Response(
+     *       response="200",
+     *       description="Détail de l'utilisateur",
+     *       @OA\JsonContent(ref="#/components/schemas/User")
+     *   ),
      *   @OA\Response(response=403, description="Vous n'êtes pas autorisé à accèder à cette ressource."),
      *   @OA\Response(response=401, description="Erreur du token JWT"),
      *   @OA\Response(response=404, description="Cet utilisateur n'existe pas")
      * )
-     * *
-     * @Route("/api/user/{id}", name="User",methods={"GET"})
+     * 
+     * @Route("/api/user/{id}", name="api_user_show", methods={"GET"})
      * 
      */
     public function findUser(UserRepository $userRepository,$id,SerializerInterface $serializer)

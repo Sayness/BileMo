@@ -97,7 +97,7 @@ class CustomerController extends AbstractController
 
     /**
      * @OA\Get(
-     *    path="/api/customers",
+     *    path="/api/customer",
      *    security={"bearer"},
      *   summary="Liste des clients",
      *   @OA\Response(response=200, description="tous les clients"),
@@ -107,7 +107,7 @@ class CustomerController extends AbstractController
      * )
      * 
      * 
-     * @Route("/api/customers", name="Customers",methods={"GET"} )
+     * @Route("/api/customer", name="api_customer_index", methods={"GET"})
      */
     public function listCustomers(CustomerRepository $customerRepository): Response
     {
@@ -120,10 +120,11 @@ class CustomerController extends AbstractController
     }
 
 
-/**
+    /**
      * @OA\Post(
-     *     path="/customers",
+     *     path="/api/customer",
      *   summary="Créer un nouveau client",
+     *   security={"bearer"},
      *   @OA\RequestBody(
      *     required=true,
      *     @OA\MediaType(
@@ -158,11 +159,8 @@ class CustomerController extends AbstractController
      *   ),
      *   @OA\Response(
      *     response=201,
-     *     description="Utilisateur créer",
-     *     @OA\JsonContent(
-     *       type="array",
-     *          @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Customer"))
-     *     )
+     *     description="Client créé",
+     *     @OA\JsonContent(ref="#/components/schemas/Customer")
      *   ),
      *   @OA\Response(response=400, description="Erreur de syntaxe"),
      *   @OA\Response(
@@ -174,7 +172,7 @@ class CustomerController extends AbstractController
      *     description="Accès interdit"
      *   )
      * )
-     * @Route("/customers", name="store_customer",methods={"POST"})
+     * @Route("/api/customer", name="api_customer_create", methods={"POST"})
      */
     public function storeCustomer(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UserPasswordHasherInterface $customerPasswordEncoder, ValidatorInterface $validator):Response
     {

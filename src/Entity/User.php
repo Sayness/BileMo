@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Serializer\Groups({"customer:read", "user:read"})
+     * @Serializer\Exclude
      * @OA\Property(type="string",nullable=true)
      */
     private $password;

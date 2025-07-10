@@ -25,14 +25,14 @@ class ProductController extends AbstractController
 {
     /**
      * @OA\Get(
-     *    path="/products",
-     *   summary="Liste des produit",
+     *    path="/api/product",
+     *   summary="Liste des produits",
      *   @OA\Response(response=200, description="tous les produits"),
-     *   @OA\Response(response=404, description="not found"),
+     *   @OA\Response(response=404, description="Aucun produit trouvé"),
      *  
      * )
      * 
-     * @Route("/products", name="api_product_index",methods={"GET"})
+     * @Route("/api/product", name="api_product_index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository,SerializerInterface $serializer)
     {
@@ -48,19 +48,22 @@ class ProductController extends AbstractController
   
 
     /**
-     *  
      * @OA\Get(
-     *     path="/product/{id}",
+     *     path="/api/product/{id}",
      *   summary="Recuperer un produit par ID",
      *   @OA\PathParameter(
      *     name="id",
      *     description="l'id du produit que vous voulez recuperer"
      *   ),
-     *   @OA\Response(response=200, description="Detail du produit"),
-     *   @OA\Response(response=404, description="Aucun produit trouvé")
+     *   @OA\Response(
+     *       response="200",
+     *       description="Detail du produit",
+     *       @OA\JsonContent(ref="#/components/schemas/Product")
+     *   ),
+     *   @OA\Response(response=404, description="Aucun produit trouvé avec cet ID")
      * )
      *
-     * @Route("/product/{id}", name="api_find_product", methods={"GET"})
+     * @Route("/api/product/{id}", name="api_product_show", methods={"GET"})
      */
     public function api_find_product(ProductRepository $productRepository,$id, SerializerInterface $serializer)
     {

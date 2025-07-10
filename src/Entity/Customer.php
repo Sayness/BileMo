@@ -68,7 +68,7 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      *  @var string The hashed password
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Serializer\Groups({"customer:read"})
+     * @Serializer\Exclude
      * @OA\Property(type="string",nullable=true)
      */
     private $password;

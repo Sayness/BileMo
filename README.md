@@ -1,9 +1,7 @@
-# P7_bilemo
-
 Installation du projet : 
  
   1/Il faut faire cette commande pour cloner le projet : 
-   `git clone https://github.com/RedaKH/P7_bilemo.git`
+   `git clone https://github.com/Sayness/BileMo.git`
    
    2/Vous devez ensuite configurer la connexion à la base de données en allant sur le fichier .env :
    `DATABASE_URL="mysql://votre_nom:votre_mdp@127.0.0.1:3306/votre_bdd?serverVersion=5.7&charset=utf8mb4"`
